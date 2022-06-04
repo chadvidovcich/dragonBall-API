@@ -1,38 +1,46 @@
 # DragonBallAPI
-Shout out to [Coswold](https://github.com/Coswold) for making the [original repo](https://github.com/Coswold/Dragon_Ball_API). 
+
+## Table of contents
+
+- [What it is and Where to find it](#what-it-is)
+- [API Usage](#api-usage)
 
 ## What it is
-The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries are limited by IP address and will return either characters or planets from the series. By creating an account, you will be able to submit character data. I am currently working on adding characters and planets to the database and have added the option for you to contribute as well. I am still working on how to verify the input from users. Check out the deployment [here](############/).
+The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries are limited by IP address and will return either characters or planets from the series. 
+By creating an account, you will be have the ability to submit characters and planets to the database to help the community grow.
 
-## Introduction
+## Where to find it
+> Check out the deployment [here](https://dragonballapi.herokuapp.com/).
+
+# API Usage
 This documentation will help you get familiar with the resources of the Dragon Ball API and show you how to make different queries, so that you can get the most out of it.
 
-### Rate Limit
-Authentication has been implemented as well as a limit on queries of up to 100 per every 15 minutes. I implemented `express-rate-limit` to stop malicious queries, data submissions, and account creations. After 100 queries, 5 character submissions, or 2 account creations, your IP will be flagged for a certain period of time.
+## Rate Limit
+Authentication has been implemented as well as a limit on queries of up to 100 per every 15 minutes. I implemented `express-rate-limit` to stop malicious queries, data submissions, and account creations. After several incorrect attempts, your IP will be flagged for a certain period of time.
 
 ### Rest
-Base url: ########
+Base url: https://dragonballapi.herokuapp.com/api/
 
-The base url contains information about all available API's resources. All responses will return data in `json`.
+The base url contains information about all available API resources.
 
 *Sample Request*
 ```
-############/api/
+https://dragonballapi.herokuapp.com/api/
 ```
+```
+//JSON Response
 
-```
 {
-  "characters": "############/api/character",
-  "planets": "############/api/location",
+  "characters": "https://dragonballapi.herokuapp.com/api/character",
+  "planets": "https://dragonballapi.herokuapp.com/api/location",
 }
 ```
-There are currently 2 available resources:
+Currently available resources are:
 
 * Character: Used to get all characters
 * Planet: Used to get all planets
 
 ## Characters
-Currently collecting data on characters.
 
 ### Character schema
 |Key|Type|Description|
@@ -50,15 +58,15 @@ Currently collecting data on characters.
 ### Get all characters
 You can access the list of characters by using the /character endpoint.
 ```
-############/api/character/
+https://dragonballapi.herokuapp.com/api/character/
 ```
 
 ### Get a single character
-You can get a single character by adding the name as a parameter: /character/Gohan
+You can get a single character by adding the name as a parameter: /character/`<Gohan>`
 
-If a name has a space `' '`, replace it with an underscore `_`.
+If a name has a space `' '`, replace it with an underscore `_` like in *`Majin_Buu`*
 ```
-############/api/character/Gohan
+https://dragonballapi.herokuapp.com/api/character/Gohan
 ```
 ```
 {
@@ -76,7 +84,6 @@ If a name has a space `' '`, replace it with an underscore `_`.
 ```
 
 ## Planet
-Currently collecting data on planets.
 
 ### Planet schema
 |Key|Type|Description|
@@ -91,15 +98,15 @@ Currently collecting data on planets.
 ### Get all planets
 You can access the list of characters by using the /planet endpoint.
 ```
-############/api/planet/
+https://dragonballapi.herokuapp.com/api/planet/
 ```
 
 ### Get a single planet
-You can get a single character by adding the name as a parameter: /planet/Earth
+You can get a single character by adding the name as a parameter: /planet/`<Earth>`
 
-If a name has a space `' '`, replace it with an underscore `_`.
+If a planet has a space `' '`, replace it with an underscore `_` like in  *`Cooler_6`*
 ```
-############/api/planet/Earth
+https://dragonballapi.herokuapp.com/api/planet/Earth
 ```
 ```
 {
@@ -113,11 +120,14 @@ If a name has a space `' '`, replace it with an underscore `_`.
 }
 ```
 
-## Getting Started
+<!-- ## Getting Started -->
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+<!-- These instructions will get you a copy of the project up and running on your local machine for **development and testing purposes**. -->
 
-### Installing
+<!-- For access to the live deployment, visit:  
+[https://dragonballapi.herokuapp.com](https://dragonballapi.herokuapp.com/) -->
+
+<!-- ### Installing
 
 Install all dependencies
 
@@ -135,23 +145,23 @@ Add secret key to .env
 
 ```
 SECRET = ???
-```
+``` -->
 
 ## Built With
 
-* [Bootstrap](https://getbootstrap.com/) - Web framework
-* [Express-rate-limit](https://www.npmjs.com/package/express-rate-limit) - Rate limiting middleware
 * [Npm](https://www.npmjs.com/) - Dependency management
-* [Json Web Tokens](https://jwt.io/) - Encryption
 * [MongoDB](https://www.mongodb.com/) - Document based database
+* [Express-rate-limit](https://www.npmjs.com/package/express-rate-limit) - Rate limiting middleware
+* [JSON Web Tokens](https://jwt.io/) - Encryption
+* [Bootstrap](https://getbootstrap.com/) - Web framework
 
 ## Authors
 
-* **[DragonBallAPI](https://github.com/Coswold/Dragon_Ball_API)** - *Forked from* project inactive from Mar2019
+### [Chad](https://github.com/chadvidovcich) - *Main Author*
 
-See also the list of [contributors](https://github.com/coswold/Dragon_Ball_API/contributors) who participated in this project.
+<!-- See also the list of [contributors](https://github.com/coswold/Dragon_Ball_API/contributors) who participated in this project. -->
 
 ## Acknowledgments
 
-* Thanks to [Blackrock Digital](https://github.com/BlackrockDigital) for the styling template.
 * Inspiration came from [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh).
+* Shout out to [Coswold](https://github.com/Coswold) for making the [OG DragonBallAPI API](https://github.com/Coswold/Dragon_Ball_API) which gave inspiration for this project. 
