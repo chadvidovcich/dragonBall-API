@@ -4,6 +4,10 @@
 
 - [What it is and Where to find it](#what-it-is)
 - [API Usage](#api-usage)
+  - [REST](#rest)
+  - [Characters](#characters)
+  - [Planets](#planets)
+- [Acknowledgments](#acknowledgments)
 
 ## What it is
 The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries are limited by IP address and will return either characters or planets from the series. 
@@ -15,10 +19,10 @@ By creating an account, you will be have the ability to submit characters and pl
 # API Usage
 This documentation will help you get familiar with the resources of the Dragon Ball API and show you how to make different queries, so that you can get the most out of it.
 
-## Rate Limit
+### Rate Limit
 Authentication has been implemented as well as a limit on queries of up to 100 per every 15 minutes. I implemented `express-rate-limit` to stop malicious queries, data submissions, and account creations. After several incorrect attempts, your IP will be flagged for a certain period of time.
 
-### Rest
+## REST
 Base url: https://dragonballapi.herokuapp.com/api/
 
 The base url contains information about all available API resources.
@@ -40,9 +44,9 @@ Currently available resources are:
 * Character: Used to get all characters
 * Planet: Used to get all planets
 
-## Characters
+### Characters
 
-### Character schema
+#### Character schema
 |Key|Type|Description|
 |---|---|---|
 |name|string|The name of the character.
@@ -55,13 +59,13 @@ Currently available resources are:
 |url|string (url)|Link to the character's own URL endpoint.
 |created|string|Time at which the character was created in the database.
 
-### Get all characters
+#### Get all characters
 You can access the list of characters by using the /character endpoint.
 ```
 https://dragonballapi.herokuapp.com/api/character/
 ```
 
-### Get a single character
+#### Get a single character
 You can get a single character by adding the name as a parameter: /character/`<Gohan>`
 
 If a name has a space `' '`, replace it with an underscore `_` like in *`Majin_Buu`*
@@ -83,9 +87,9 @@ https://dragonballapi.herokuapp.com/api/character/Gohan
 }
 ```
 
-## Planet
+### Planets
 
-### Planet schema
+#### Planets schema
 |Key|Type|Description|
 |---|---|---|
 |name|string|The name of the planet.
@@ -95,13 +99,13 @@ https://dragonballapi.herokuapp.com/api/character/Gohan
 |created|string|Time at which the planet was created in the database.
 
 
-### Get all planets
+#### Get all planets
 You can access the list of characters by using the /planet endpoint.
 ```
 https://dragonballapi.herokuapp.com/api/planet/
 ```
 
-### Get a single planet
+#### Get a single planet
 You can get a single character by adding the name as a parameter: /planet/`<Earth>`
 
 If a planet has a space `' '`, replace it with an underscore `_` like in  *`Cooler_6`*
@@ -147,7 +151,16 @@ Add secret key to .env
 SECRET = ???
 ``` -->
 
-## Built With
+## Acknowledgments
+
+
+### Authors
+ 
+[Chad](https://github.com/chadvidovcich) - *Main Author*
+
+<!-- See also the list of [contributors](https://github.com/coswold/Dragon_Ball_API/contributors) who participated in this project. -->
+
+### Built With
 
 * [Npm](https://www.npmjs.com/) - Dependency management
 * [MongoDB](https://www.mongodb.com/) - Document based database
@@ -155,13 +168,6 @@ SECRET = ???
 * [JSON Web Tokens](https://jwt.io/) - Encryption
 * [Bootstrap](https://getbootstrap.com/) - Web framework
 
-## Authors
-
-### [Chad](https://github.com/chadvidovcich) - *Main Author*
-
-<!-- See also the list of [contributors](https://github.com/coswold/Dragon_Ball_API/contributors) who participated in this project. -->
-
-## Acknowledgments
-
-* Inspiration came from [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh).
-* Shout out to [Coswold](https://github.com/Coswold) for making the [OG DragonBallAPI API](https://github.com/Coswold/Dragon_Ball_API) which gave inspiration for this project. 
+### Inspiration
+* [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh)
+* Shout out to [Coswold](https://github.com/Coswold) for making the [OG DragonBallAPI](https://github.com/Coswold/Dragon_Ball_API)
