@@ -53,14 +53,14 @@ Currently available resources are:
 |Key|Type|Description|
 |---|---|---|
 |name|string|The name of the character.
-|status|string|The status of the character ('Alive', 'Dead' or 'unknown').
-|species|string|The species of the character.
-|series|string|The sub-series that the character is from i.e. Z, GT, etc.
-|gender|string|The gender of the character ('Female', 'Male', 'Genderless').
+|race|string|The species of the character.
 |origin planet|string (url)|Url to the character's origin planet.
+|wiki url|string (url)|Link to the character's wiki page.
+|series|string|The sub-series that the character is from i.e. Z, GT, etc.
 |image|string (url)|Link to the character's image.
 |url|string (url)|Link to the character's own URL endpoint.
 |created|string|Time at which the character was created in the database.
+<!-- |edited|string|Time at which the character was last edited in the database. -->
 
 #### Get all characters
 You can access the list of characters by using the /character endpoint.

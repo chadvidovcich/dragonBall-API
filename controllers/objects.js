@@ -80,7 +80,7 @@ module.exports = function(app) {
         if (req.user) {
             // INSTANTIATE INSTANCE OF MODEL
             const character = new Character(req.body);
-            character.name = character.name.replace(/ /g,"_")
+            character.name = character.name.replace(/ /g,"_").toLowerCase()
             character.url = "/api/character/" + character.name
             if (!req.body.image) {
                 character.image = "../images/" + character.name + ".jpg"

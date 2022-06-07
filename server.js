@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000;
-const { engine } = require('express-handlebars')
 const { body, validationResult } = require('express-validator');
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -49,9 +48,6 @@ require('./controllers/objects')(app)
 require('./controllers/api')(app)
 require('./controllers/auth')(app)
 
-
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
 
 module.exports = app;
 
