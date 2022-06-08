@@ -14,7 +14,7 @@ module.exports = function(app) {
     })
 
     // GET ALL CHARACTERS
-    app.get("/api/character", (req, res) => {
+    app.get("/api/characters", (req, res) => {
         Character.find()
         .then(character => {
             res.json(character);
@@ -25,7 +25,7 @@ module.exports = function(app) {
     })
 
     // GET SINGLE CHARACTER
-    app.get("/api/character/:name", (req, res) => {
+    app.get("/api/characters/:name", (req, res) => {
         Character.findOne(req.params)
         .then(character => {
             res.json(character);

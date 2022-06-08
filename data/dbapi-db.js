@@ -1,12 +1,13 @@
 /* Mongoose Connection */
 const mongoose = require("mongoose");
 assert = require("assert");
+mongoose.set('useCreateIndex', true);
 
 const url = process.env.MONGODB_URI || 'mongodb://localhost/dbapi-db';
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
-  { useNewUrlParser: true },
+  { useNewUrlParser: true, useUnifiedTopology: true },
   function(err, db) {
     assert.equal(null, err);
     console.log("Connected successfully to database");

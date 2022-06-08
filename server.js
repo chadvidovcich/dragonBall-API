@@ -1,31 +1,31 @@
+require('dotenv').config();
+
 const express = require('express')
 const app = express();
-const port = process.env.PORT || 3000;
-const { body, validationResult } = require('express-validator');
+const port = process.env.PORT || 8000;
+// const { body, validationResult } = require('express-validator');
+
 const bodyParser = require('body-parser');
-require('dotenv').config();
 const rateLimit = require("express-rate-limit");
 
 app.enable("trust proxy");
+app.use(express.static('static'))
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10
 });
 
-app.use("/api/", apiLimiter);
+// app.use("/api/", apiLimiter);
 
-var cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
+// var cookieParser = require('cookie-parser');
+// const jwt = require('jsonwebtoken');
 
-app.use(cookieParser());
+// app.use(cookieParser());
 
 // Use Body Parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-app.use(express.static('public'));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 var checkAuth = (req, res, next) => {
     console.log("Checking authentication");
@@ -40,15 +40,12 @@ var checkAuth = (req, res, next) => {
     next();
 };
 
-app.use(checkAuth);
-
+// app.use(checkAuth);
 
 require('./data/dbapi-db');
 require('./controllers/objects')(app)
 require('./controllers/api')(app)
 require('./controllers/auth')(app)
 
-
 module.exports = app;
-
 app.listen(port, () => console.log(`App listening on port ${port}!`))
