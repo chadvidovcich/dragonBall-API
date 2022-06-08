@@ -2,19 +2,20 @@ const Character = require('../models/character')
 const Planet = require('../models/planet')
 
 module.exports = function(app) {
+    const baseURL = "dragonballapi.herokuapp.com/api/"
 
     // GET ALL RESOURCES
     app.get("/api", (req, res) => {
         var resource = {
-            "characters": "dragon-ball-api.herokuapp.com/api/character",
-            "planets": "dragon-ball-api.herokuapp.com/api/planet"
+            "List All Characters": baseURL + "character",
+            "List all Planets": baseURL + "planet"
         }
         res.json(resource);
 
     })
 
     // GET ALL CHARACTERS
-    app.get("/api/characters", (req, res) => {
+    app.get("/api/character", (req, res) => {
         Character.find()
         .then(character => {
             res.json(character);
@@ -25,7 +26,7 @@ module.exports = function(app) {
     })
 
     // GET SINGLE CHARACTER
-    app.get("/api/characters/:name", (req, res) => {
+    app.get("/api/character/:name", (req, res) => {
         Character.findOne(req.params)
         .then(character => {
             res.json(character);

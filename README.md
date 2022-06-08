@@ -39,7 +39,7 @@ https://dragonballapi.herokuapp.com/api/
 
 {
   "characters": "https://dragonballapi.herokuapp.com/api/character",
-  "planets": "https://dragonballapi.herokuapp.com/api/location",
+  "planets": "https://dragonballapi.herokuapp.com/api/planet",
 }
 ```
 Currently available resources are:
