@@ -5,8 +5,8 @@ const port = process.env.PORT || 8000;
 require('dotenv').config();
 
 let db,
-dbConnectionStr = process.env.MONGODB_URI || 'mongodb://localhost/dbapi-db',
-dbName = 'dragonBallApi'
+    dbConnectionStr = process.env.MONGODB_URI || 'mongodb://localhost/dbapi-db',
+    dbName = 'dragonBallApi'
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
 .then(client => {
@@ -20,12 +20,44 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.get('/', (request, response) => {
-    db.collection('dragonBallApi').find().sort().toArray()
+    db.collection('characters').find().toArray()
         .then(data => {
-            // response.sendFile(path.join(__dirname,'/public/index.html'))
+            response.sendFile(path.join(__dirname,'/public/index.html'))
             console.log('Responded with /public/index.html');
         })
         .catch(error => console.error(error))
+    })
+
+app.get('/edit', (request, response) => {
+    db.collection('characters').find().toArray()
+        .then(data => {
+            response.render('addToDB.ejs', { info: data })
+            console.log('Responded with addToDB.ejs');
+        })
+        .catch(error => console.error(error))
+    })
+    
+app.post('/addCharacter', (request, response) => {
+    db.collection('characters').insertOne({
+        name: request.body.name
+    })
+        .then(result => {
+            console.log('Character Added');
+            response.redirect('/edit')
+        })
+        .catch(error => console.error(error))
+})
+
+app.delete('/deleteCharacter', (request, response) => {
+    db.collection('characters').deleteOne({
+        name: request.body.name
+    })
+        .then(result => {
+            console.log('Character Deleted')
+            response.json('Character Deleted')
+        })
+        .catch(error => console.error(error))   
+
 })
 
 // const { body, validationResult } = require('express-validator');

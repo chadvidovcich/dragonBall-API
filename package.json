@@ -4,9 +4,7 @@
   "description": "",
   "main": "server.js",
   "directories": {
-    "public": "public",
-    "controllers": "controllers",
-    "models": "models"
+    "public": "public"
   },
   "scripts": {
     "test": "clear; node server.js",
