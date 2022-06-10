@@ -60,6 +60,7 @@ app.delete('/deleteCharacter', (request, response) => {
 
 })
 
+
 // const { body, validationResult } = require('express-validator');
 
 // const bodyParser = require('body-parser');
