@@ -29,7 +29,7 @@ app.get('/', (request, response) => {
     })
 
 app.get('/edit', (request, response) => {
-    db.collection('characters').find().toArray()
+    db.collection('characters').find().sort({ name: 1 }).toArray()
         .then(data => {
             response.render('addToDB.ejs', { info: data })
             console.log('Responded with addToDB.ejs');
@@ -39,7 +39,7 @@ app.get('/edit', (request, response) => {
     
 app.post('/addCharacter', (request, response) => {
     db.collection('characters').insertOne({
-        name: request.body.name
+        name: request.body.name.toLowerCase()
     })
         .then(result => {
             console.log('Character Added');
