@@ -22,8 +22,8 @@ By creating an account, you will be have the ability to submit characters and pl
 # API Usage
 This documentation will help you get familiar with the resources of the Dragon Ball API and show you how to make different queries, so that you can get the most out of it.
 
-### Rate Limit
-Authentication has been implemented as well as a limit on queries of up to 100 per every 15 minutes. I implemented `express-rate-limit` to stop malicious queries, data submissions, and account creations. After several incorrect attempts, your IP will be flagged for a certain period of time.
+<!-- ### Rate Limit -->
+<!-- Authentication has been implemented as well as a limit on queries of up to 100 per every 15 minutes. I implemented `express-rate-limit` to stop malicious queries, data submissions, and account creations. After several incorrect attempts, your IP will be flagged for a certain period of time. -->
 
 ## REST
 Base url: https://dragonballapi.herokuapp.com/api/
@@ -49,7 +49,7 @@ Currently available resources are:
 
 ### Characters
 
-#### Character schema
+<!-- #### Character schema
 |Key|Type|Description|
 |---|---|---|
 |name|string|The name of the character.
@@ -59,7 +59,7 @@ Currently available resources are:
 |series|string|The sub-series that the character is from i.e. Z, GT, etc.
 |image|string (url)|Link to the character's image.
 |url|string (url)|Link to the character's own URL endpoint.
-|created|string|Time at which the character was created in the database.
+|created|string|Time at which the character was created in the database. -->
 <!-- |edited|string|Time at which the character was last edited in the database. -->
 
 #### Get all characters
@@ -75,7 +75,7 @@ If a name has a space `' '`, replace it with an underscore `_` like in *`Majin_B
 ```
 https://dragonballapi.herokuapp.com/api/character/Gohan
 ```
-```
+<!-- ```
 {
   "species":"Saiyan",
   "status":"Alive",
@@ -88,18 +88,18 @@ https://dragonballapi.herokuapp.com/api/character/Gohan
   "url":"/api/character/Gohan",
   "__v":0
 }
-```
+``` -->
 
 ### Planets
 
-#### Planets schema
+<!-- #### Planets schema
 |Key|Type|Description|
 |---|---|---|
 |name|string|The name of the planet.
 |residents|string|All characters from this planet.
 |image|string (url)|Link to the planet's image.
 |url|string|Link to planets own endpoint.
-|created|string|Time at which the planet was created in the database.
+|created|string|Time at which the planet was created in the database. -->
 
 
 #### Get all planets
@@ -115,7 +115,7 @@ If a planet has a space `' '`, replace it with an underscore `_` like in  *`Cool
 ```
 https://dragonballapi.herokuapp.com/api/planet/Earth
 ```
-```
+<!-- ```
 {
   "residents":["Gohan","Trunks","Android16"],
   "_id":"5c785e7a52cc1dd11ddb59ba",
@@ -125,7 +125,7 @@ https://dragonballapi.herokuapp.com/api/planet/Earth
   "image":"/api/planet/images/Earth.jpeg",
   "__v":0
 }
-```
+``` -->
 
 <!-- ## Getting Started -->
 
@@ -165,11 +165,11 @@ SECRET = ???
 
 ### Built With
 
-* [Npm](https://www.npmjs.com/) - Dependency management
 * [MongoDB](https://www.mongodb.com/) - Document based database
-* [Express-rate-limit](https://www.npmjs.com/package/express-rate-limit) - Rate limiting middleware
-* [JSON Web Tokens](https://jwt.io/) - Encryption
-* [Bootstrap](https://getbootstrap.com/) - Web framework
+* [Express](https://expressjs.com/) - Minimalist node.js framework
+* [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+* [Node (npm)](https://www.npmjs.com/) - Dependency management
+* [Bootstrap](https://getbootstrap.com/) - Web Client framework
 
 ### Inspiration
 * [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh)

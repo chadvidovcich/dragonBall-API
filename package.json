@@ -1,31 +1,29 @@
 {
-  "name": "test_docs",
+  "name": "Dragon Ball API",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "directories": {
-    "doc": "docs"
+    "public": "public",
+    "controllers": "controllers",
+    "models": "models"
   },
   "scripts": {
     "test": "clear; node server.js",
     "start": "node server.js"
   },
-  "repository": {},
-  "author": "",
-  "license": "ISC",
+  "repository": "https://github.com/chadvidovcich/dragonBall-API",
+  "author": "Chad Vidovcich",
+  "license": "BSD 3",
   "bugs": {
     "url": "https://github.com/chadvidovcich/Dragon_Ball_API/issues"
   },
   "homepage": "https://github.com/chadvidovcich/Dragon_Ball_API #readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "ejs": "^3.1.8",
     "express": "^4.16.4",
-    "express-rate-limit": "^3.4.0",
-    "express-validator": "^6.14.1",
-    "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.13.14"
+    "mongodb": "^4.7.0"
   }
 }
