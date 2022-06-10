@@ -13,8 +13,8 @@
 
 **Under Development Jun 2022**
 
-The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries are limited by IP address and will return either characters or planets from the series. 
-By creating an account, you will be have the ability to submit characters and planets to the database to help the community grow.
+The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries will return characters or planets from the series. 
+<!-- By creating an account, you will be have the ability to submit characters and planets to the database to help the community grow. -->
 
 ## Where to find it
 > Check out the deployment [here](https://dragonballapi.herokuapp.com/).
