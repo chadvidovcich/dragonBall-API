@@ -5,7 +5,7 @@ const port = process.env.PORT || 8000;
 require('dotenv').config();
 
 let db,
-    dbConnectionStr = process.env.MONGODB_URI || 'mongodb://localhost/dbapi-db',
+    dbConnectionStr = process.env.MONGODB_URI,
     dbName = 'dragonBallApi'
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
@@ -19,20 +19,11 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.get('/', (request, response) => {
-    db.collection('characters').find().toArray()
-        .then(data => {
-            response.sendFile(path.join(__dirname,'/public/index.html'))
-            console.log('Responded with /public/index.html');
-        })
-        .catch(error => console.error(error))
-    })
-
-app.get('/edit', (request, response) => {
+app.get('/ui', (request, response) => {
     db.collection('characters').find().sort({ name: 1 }).toArray()
         .then(data => {
             response.render('addToDB.ejs', { info: data })
-            console.log('Responded with addToDB.ejs');
+            console.log('Responded with UI Page');
         })
         .catch(error => console.error(error))
     })
@@ -42,24 +33,38 @@ app.post('/addCharacter', (request, response) => {
         name: request.body.name.toLowerCase()
     })
         .then(result => {
+            response.redirect('/ui')
             console.log('Character Added');
-            response.redirect('/edit')
         })
         .catch(error => console.error(error))
-})
-
+    })
+    
+// app.put('/modifyCharacter', (request, response) => {
+//     db.collection('characters').findOneAndUpdate({
+//         name: request.body.name
+//     })
+//     .then(result => {
+//         response.json('Character Modified')
+//         response.redirect('/ui')
+//         console.log('Character Modified')
+//     })
+//     .catch(error => console.error(error))   
+// })
+    
 app.delete('/deleteCharacter', (request, response) => {
     db.collection('characters').deleteOne({
         name: request.body.name
     })
-        .then(result => {
-            console.log('Character Deleted')
-            response.json('Character Deleted')
-        })
-        .catch(error => console.error(error))   
-
+    .then(result => {
+        if (result.deletedCount === 0) {
+            console.log('No Character Found to Delete')
+            return response.json('No Character Found to Delete')
+        }
+        console.log('Character Deleted')
+        response.json('Character Deleted')
+    })
+    .catch(error => console.error(error))   
 })
-
 
 // const { body, validationResult } = require('express-validator');
 
@@ -99,7 +104,6 @@ app.delete('/deleteCharacter', (request, response) => {
 
 // app.use(checkAuth);
 
-// require('./data/dbapi-db');
 // require('./controllers/api')(app)
 // require('./controllers/objects')(app)
 // require('./controllers/auth')(app)

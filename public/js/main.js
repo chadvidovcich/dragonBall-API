@@ -1,13 +1,11 @@
-const addButton = document.querySelectorAll('#buttonAdd')
-const deleteText = document.querySelectorAll('.fa-trash')
-
-Array.from(addButton).forEach((element)=>{
-    element.addEventListener('click', addCharacter)
-})
+const addButton = document.querySelector('#buttonAdd')
+const deleteText = document.querySelectorAll('.trashCans')
 
 Array.from(deleteText).forEach((element)=>{
     element.addEventListener('click', deleteCharacter)
 })
+
+addButton.addEventListener('click', addCharacter)
 
 async function addCharacter(){
     const sName = this.parentNode.childNodes[1].innerText
