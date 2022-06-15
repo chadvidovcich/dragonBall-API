@@ -15,9 +15,9 @@
   "author": "Chad Vidovcich",
   "license": "BSD 3",
   "bugs": {
-    "url": "https://github.com/chadvidovcich/Dragon_Ball_API/issues"
+    "url": "https://github.com/chadvidovcich/dragonBall-API/issues"
   },
-  "homepage": "https://github.com/chadvidovcich/Dragon_Ball_API #readme",
+  "homepage": "https://github.com/chadvidovcich/dragonBall-API#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",

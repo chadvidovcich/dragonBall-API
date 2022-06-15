@@ -169,7 +169,6 @@ SECRET = ???
 * [Express](https://expressjs.com/) - Minimalist node.js framework
 * [React](https://reactjs.org/) - A JavaScript library for building user interfaces
 * [Node (npm)](https://www.npmjs.com/) - Dependency management
-* [Bootstrap](https://getbootstrap.com/) - Web Client framework
 
 ### Inspiration
 * [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh)
