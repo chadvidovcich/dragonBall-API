@@ -22,6 +22,8 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
 //Static home page
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
+
+// bodyParser.json
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -88,10 +90,27 @@ app.get("/api/character/:characterName", async (request, response) => {
 })
 
 // ADD SINGLE CHARACTER
-app.post('/addCharacter', (request, response) => {
-    db.collection('characters').insertOne({
-        name: request.body.name.toLowerCase()
-    })
+app.post('/addCharacter', async (request, response) => {
+    const body = await request.body
+    
+    // check if content is missing
+    if (Object.values(body).includes(undefined) || Object.values(body).includes('')) {
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
+    
+    //define char JSON structure
+    const char = {
+        name: request.body.name.toLowerCase(),
+        planet: request.body.planet.toLowerCase(),
+    }
+    
+    //insert to DB
+    console.log(`adding '${char.name}' from '${char.planet}' to DB`);
+    db.collection('characters').insertOne(char)
+    
+    //refresh client side
     .then(result => {
         response.redirect('back')
         console.log('Character Added')

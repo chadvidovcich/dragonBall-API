@@ -9,12 +9,14 @@ addButton.addEventListener('click', addCharacter)
 
 async function addCharacter(){
     const sName = this.parentNode.childNodes[1].innerText
+    const sPlanet = this.parentNode.childNodes[2].innerText
     try{
-        const response = await fetch('addCharacter', {
+        const response = await fetch('/api/character', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              'name': sName
+              'name': sName,
+              'planet': sPlanet
             })
           })
         const data = await response.json()
