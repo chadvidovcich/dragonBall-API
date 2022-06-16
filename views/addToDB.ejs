@@ -64,6 +64,13 @@
                         <h2>Add A Character:</h2>
                         <form action="/addCharacter" method="POST">
                             <input type="text" placeholder="Name" name="name">
+
+                            <select name="planet">
+                                <% planets.forEach(function(planet){ %>
+                                <option value="<%= planet.name %>"><%= planet.name %></option>
+                                <% }); %>
+                            </select>
+
                             <input type="text" placeholder="Planet" name="planet">
                             <input type="submit" id="buttonAdd">
                         </form>
