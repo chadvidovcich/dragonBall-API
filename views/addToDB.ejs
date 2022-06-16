@@ -8,12 +8,7 @@
         <title>Dragon Ball API</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- Core CSS-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
 
@@ -56,8 +51,8 @@
                         <ul class="Characters">
                         <% for(let i=0; i < characters.length; i++) { %>
                             <li class="Character">
-                                <span class="trashCans"><%= characters[i].name %></span>
-                                <span class='fa fa-trash trashCans'></span>
+                                <span class=""><%= characters[i].name %></span>
+                                <span class='trashCan'>DELETE</span>
                             </li>
                         <% } %>
                         </ul>
@@ -70,8 +65,6 @@
                                 <option value="<%= planet.name %>"><%= planet.name %></option>
                                 <% }); %>
                             </select>
-
-                            <input type="text" placeholder="Planet" name="planet">
                             <input type="submit" id="buttonAdd">
                         </form>
                     </div>
@@ -84,8 +77,8 @@
                         <ul class="Planets">
                         <% for(let i=0; i < planets.length; i++) { %>
                             <li class="Planets">
-                                <span class="trashCans"><%= planets[i].name %></span>
-                                <span class='fa fa-trash trashCans'></span>
+                                <span class=""><%= planets[i].name %></span>
+                                <span class='trashCan'>DELETE</span>
                             </li>
                         <% } %>
                         </ul>

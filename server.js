@@ -107,13 +107,12 @@ app.post('/addCharacter', async (request, response) => {
     }
     
     //insert to DB
-    console.log(`adding '${char.name}' from '${char.planet}' to DB`);
+    console.log(`adding character '${char.name}' from planet '${char.planet}' to DB`);
     db.collection('characters').insertOne(char)
     
     //refresh client side
     .then(result => {
-        response.redirect('back')
-        console.log('Character Added')
+        response.status(200).redirect('back')
     })
     .catch(error => console.error(error))
 })
@@ -133,6 +132,14 @@ db.collection('characters').deleteOne({
 })
 .catch(error => console.error(error))   
 })
+
+
+
+
+
+
+
+
 
 // GET ALL PLANETS
 app.get("/api/planet", async (request, response) => {

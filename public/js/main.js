@@ -1,7 +1,7 @@
 const addButton = document.querySelector('#buttonAdd')
-const deleteText = document.querySelectorAll('.trashCans')
+const deleteText = document.querySelectorAll('.trashCan')
 
-Array.from(deleteText).forEach((element)=>{
+deleteText.forEach((element)=>{
     element.parentElement.className === "Character" ? element.addEventListener('click', deleteCharacter) : element.addEventListener('click', deletePlanet)
 })
 
