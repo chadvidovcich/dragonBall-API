@@ -19,8 +19,7 @@ async function addCharacter(){
           })
         const data = await response.json()
         console.log(data)
-        location.reload()
-
+        location.reload(true)
     }catch(err){
         console.log(err)
     }
@@ -38,11 +37,11 @@ async function deleteCharacter(){
           })
         const data = await response.json()
         console.log(data)
-        location.reload()
-
+        
     }catch(err){
         console.log(err)
     }
+    location.reload(true)
 }
 
 async function addPlanet(){
@@ -57,7 +56,7 @@ async function addPlanet(){
           })
         const data = await response.json()
         console.log(data)
-        location.reload()
+        location.reload(true)
 
     }catch(err){
         console.log(err)
@@ -76,7 +75,7 @@ async function deletePlanet(){
           })
         const data = await response.json()
         console.log(data)
-        location.reload()
+        location.reload(true)
 
     }catch(err){
         console.log(err)

@@ -3,7 +3,8 @@ require('dotenv').config();
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 const cors = require('cors')
-const path = require('path')
+const path = require('path');
+const { join } = require('path');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.get('/ui', async (request, response) => {
     try{
         let characters = await db.collection('characters').find().sort({ name: 1 }).toArray()
         let planets = await db.collection('planets').find().sort({ name: 1 }).toArray()
+        response.status(200)
         response.render('addToDB.ejs', { characters: characters, planets: planets })
         response.end()
     }
@@ -44,47 +46,55 @@ app.get('/ui', async (request, response) => {
 const baseURL = "dragonballapi.herokuapp.com/api"
 
 // GET ALL RESOURCES
-app.get("/api", (req, res) => {
+app.get("/api", (request, response) => {
     var resource = {
         "List All Characters": baseURL + "/character",
-        "List all Planets": baseURL + "/planet"
+        "List All Planets": baseURL + "/planet"
     }
-    res.json(resource);
+    response.status(200).json(resource)
 
 })
 
 // GET ALL CHARACTERS
-app.get("/api/character", async (req, res) => {
+app.get("/api/character", async (request, response) => {
     try{
         let characters = await db.collection('characters').find().sort({ name: 1 }).toArray()
-        res.json(characters);
-        res.end()
+        
+        if (characters) {
+            response.status(200).json(characters)
+        } else {
+            response.status(404).end()
+        }
     }
     catch(error){
-        console.error(error);
+        console.error(error)
     }
 })
 
 // GET SINGLE CHARACTER
-app.get("/api/character/:characterName", async (req, res) => {
+app.get("/api/character/:characterName", async (request, response) => {
     try{
-        let character = await db.collection('characters').findOne({'name':req.params.characterName})
-        res.json(character);
-        res.end()
+        let character = await db.collection('characters').findOne({'name':request.params.characterName})
+        
+        if (character) {
+            response.status(200).json(character)
+        } else {
+            response.status(404).end()
+        }
     }
     catch(error){
-        console.error(error);
+        console.error(error)
     }
 })
 
 // ADD SINGLE CHARACTER
 app.post('/addCharacter', (request, response) => {
-db.collection('characters').insertOne({
-    name: request.body.name.toLowerCase()
-})
+    db.collection('characters').insertOne({
+        name: request.body.name.toLowerCase()
+    })
     .then(result => {
-        response.redirect('/ui')
-        console.log('Character Added');
+        response.redirect('back')
+        console.log('Character Added')
     })
     .catch(error => console.error(error))
 })
@@ -97,35 +107,43 @@ db.collection('characters').deleteOne({
 .then(result => {
     if (result.deletedCount === 0) {
         console.log('No Character Found to Delete')
-        return response.json('No Character Found to Delete')
+        response.status(404).end()
     }
     console.log('Character Deleted')
-    response.json('Character Deleted')
+    response.status(204).end()
 })
 .catch(error => console.error(error))   
 })
 
 // GET ALL PLANETS
-app.get("/api/planet", async (req, res) => {
+app.get("/api/planet", async (request, response) => {
     try{
         let planets = await db.collection('planets').find().sort({ name: 1 }).toArray()
-        res.json(planets);
-        res.end()
+        
+        if (planets) {
+            response.json(planets).status(200)
+        } else {
+            response.status(404).end()
+        }
     }
     catch(error){
-        console.error(error);
+        console.error(error)
     }
 })
 
 // GET SINGLE PLANET
-app.get("/api/planet/:planetName", async (req, res) => {
+app.get("/api/planet/:planetName", async (request, response) => {
     try{
-        let planet = await db.collection('planets').findOne({'name':req.params.planetName})
-        res.json(planet);
-        res.end()
+        let planet = await db.collection('planets').findOne({'name':request.params.planetName})
+        
+        if (planet) {
+            response.status(200).json(planet)
+        } else {
+            response.status(404).end()
+        }
     }
     catch(error){
-        console.error(error);
+        console.error(error)
     }
 })
 
@@ -135,7 +153,7 @@ app.post('/addPlanet', (request, response) => {
         name: request.body.name.toLowerCase()
     })
         .then(result => {
-            response.redirect('/ui')
+            response.status(200).redirect('/ui')
             console.log('Planet Added');
         })
         .catch(error => console.error(error))
@@ -149,7 +167,7 @@ app.delete('/deletePlanet', (request, response) => {
     .then(result => {
         if (result.deletedCount === 0) {
             console.log('No Planet Found to Delete')
-            return response.json('No Planet Found to Delete')
+            response.json('No Planet Found to Delete')
         }
         console.log('Planet Deleted')
         response.json('Planet Deleted')
