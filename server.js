@@ -66,9 +66,9 @@ app.get("/api/character", async (req, res) => {
 })
 
 // GET SINGLE CHARACTER
-app.get("/api/character/:name", async (req, res) => {
+app.get("/api/character/:characterName", async (req, res) => {
     try{
-        let character = await db.collection('characters').findOne({'name':req.params.name})
+        let character = await db.collection('characters').findOne({'name':req.params.characterName})
         res.json(character);
         res.end()
     }
@@ -118,9 +118,9 @@ app.get("/api/planet", async (req, res) => {
 })
 
 // GET SINGLE PLANET
-app.get("/api/planet/:name", async (req, res) => {
+app.get("/api/planet/:planetName", async (req, res) => {
     try{
-        let planet = await db.collection('planets').findOne({'name':req.params.name})
+        let planet = await db.collection('planets').findOne({'name':req.params.planetName})
         res.json(planet);
         res.end()
     }
