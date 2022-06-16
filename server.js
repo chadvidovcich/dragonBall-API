@@ -1,12 +1,16 @@
-const express = require('express')
-const app = express();
-const MongoClient = require('mongodb').MongoClient
-const port = process.env.PORT || 8000;
 require('dotenv').config();
 
-let db,
-    dbConnectionStr = process.env.MONGODB_URI,
-    dbName = 'dragonBallApi'
+const express = require('express')
+const MongoClient = require('mongodb').MongoClient
+const cors = require('cors')
+const path = require('path')
+
+const app = express();
+
+//mongo DB
+let db
+let dbConnectionStr = process.env.MONGODB_URI
+let dbName = 'dragonBallApi'
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
 .then(client => {
@@ -14,99 +18,147 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     db = client.db(dbName)
 })
 
+//Static home page
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.get('/ui', (request, response) => {
-    db.collection('characters').find().sort({ name: 1 }).toArray()
-        .then(data => {
-            response.render('addToDB.ejs', { info: data })
-            console.log('Responded with UI Page');
-        })
-        .catch(error => console.error(error))
-    })
-    
+// cors
+app.use(cors())
+
+// Respond with UI page
+app.get('/ui', async (request, response) => {
+    try{
+        let characters = await db.collection('characters').find().sort({ name: 1 }).toArray()
+        let planets = await db.collection('planets').find().sort({ name: 1 }).toArray()
+        response.render('addToDB.ejs', { characters: characters, planets: planets })
+        response.end()
+    }
+    catch(error){
+        console.error(error);
+    }
+})
+
+// Base URL
+const baseURL = "dragonballapi.herokuapp.com/api"
+
+// GET ALL RESOURCES
+app.get("/api", (req, res) => {
+    var resource = {
+        "List All Characters": baseURL + "/character",
+        "List all Planets": baseURL + "/planet"
+    }
+    res.json(resource);
+
+})
+
+// GET ALL CHARACTERS
+app.get("/api/character", async (req, res) => {
+    try{
+        let characters = await db.collection('characters').find().sort({ name: 1 }).toArray()
+        res.json(characters);
+        res.end()
+    }
+    catch(error){
+        console.error(error);
+    }
+})
+
+// GET SINGLE CHARACTER
+app.get("/api/character/:name", async (req, res) => {
+    try{
+        let character = await db.collection('characters').findOne({'name':req.params.name})
+        res.json(character);
+        res.end()
+    }
+    catch(error){
+        console.error(error);
+    }
+})
+
+// ADD SINGLE CHARACTER
 app.post('/addCharacter', (request, response) => {
-    db.collection('characters').insertOne({
+db.collection('characters').insertOne({
+    name: request.body.name.toLowerCase()
+})
+    .then(result => {
+        response.redirect('/ui')
+        console.log('Character Added');
+    })
+    .catch(error => console.error(error))
+})
+
+// DELETE SINGLE CHARACTER
+app.delete('/deleteCharacter', (request, response) => {
+db.collection('characters').deleteOne({
+    name: request.body.name
+})
+.then(result => {
+    if (result.deletedCount === 0) {
+        console.log('No Character Found to Delete')
+        return response.json('No Character Found to Delete')
+    }
+    console.log('Character Deleted')
+    response.json('Character Deleted')
+})
+.catch(error => console.error(error))   
+})
+
+// GET ALL PLANETS
+app.get("/api/planet", async (req, res) => {
+    try{
+        let planets = await db.collection('planets').find().sort({ name: 1 }).toArray()
+        res.json(planets);
+        res.end()
+    }
+    catch(error){
+        console.error(error);
+    }
+})
+
+// GET SINGLE PLANET
+app.get("/api/planet/:name", async (req, res) => {
+    try{
+        let planet = await db.collection('planets').findOne({'name':req.params.name})
+        res.json(planet);
+        res.end()
+    }
+    catch(error){
+        console.error(error);
+    }
+})
+
+// ADD SINGLE PLANET
+app.post('/addPlanet', (request, response) => {
+    db.collection('planets').insertOne({
         name: request.body.name.toLowerCase()
     })
         .then(result => {
             response.redirect('/ui')
-            console.log('Character Added');
+            console.log('Planet Added');
         })
         .catch(error => console.error(error))
-    })
+})
     
-// app.put('/modifyCharacter', (request, response) => {
-//     db.collection('characters').findOneAndUpdate({
-//         name: request.body.name
-//     })
-//     .then(result => {
-//         response.json('Character Modified')
-//         response.redirect('/ui')
-//         console.log('Character Modified')
-//     })
-//     .catch(error => console.error(error))   
-// })
-    
-app.delete('/deleteCharacter', (request, response) => {
-    db.collection('characters').deleteOne({
+// DELETE SINGLE PLANET
+app.delete('/deletePlanet', (request, response) => {
+    db.collection('planets').deleteOne({
         name: request.body.name
     })
     .then(result => {
         if (result.deletedCount === 0) {
-            console.log('No Character Found to Delete')
-            return response.json('No Character Found to Delete')
+            console.log('No Planet Found to Delete')
+            return response.json('No Planet Found to Delete')
         }
-        console.log('Character Deleted')
-        response.json('Character Deleted')
+        console.log('Planet Deleted')
+        response.json('Planet Deleted')
     })
     .catch(error => console.error(error))   
 })
 
-// const { body, validationResult } = require('express-validator');
-
-// const bodyParser = require('body-parser');
-// const rateLimit = require("express-rate-limit");
-
-// app.enable("trust proxy");
-
-// const apiLimiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 10
-// });
-
-// app.use("/api/", apiLimiter);
-
-// var cookieParser = require('cookie-parser');
-// const jwt = require('jsonwebtoken');
-
-// app.use(cookieParser());
-
-// Use Body Parser
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-
-// var checkAuth = (req, res, next) => {
-//     console.log("Checking authentication");
-//     if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
-//         req.user = null;
-//     } else {
-//         var token = req.cookies.nToken;
-//         var decodedToken = jwt.decode(token, { complete: true }) || {};
-//         req.user = decodedToken.payload;
-//     }
-
-//     next();
-// };
-
-// app.use(checkAuth);
-
-// require('./controllers/api')(app)
-// require('./controllers/objects')(app)
-// require('./controllers/auth')(app)
+// Server Port and Listen
+const port = process.env.PORT || 8000;
+app.listen(port, () => console.log(`App listening on port: ${port}!`))
 
 module.exports = app;
-app.listen(port, () => console.log(`App listening on port: ${port}!`))

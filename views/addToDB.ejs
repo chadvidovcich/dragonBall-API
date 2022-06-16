@@ -47,28 +47,49 @@
                 <p class="masthead-subheading font-weight-light mb-0">Under Construction Jun 2022</p>
             </div>
         </header>
-        <!-- Database Section-->
-        <section class="page-section portfolio" id="database">
-            <div class="container">
-                <h1>Current Characters in DB</h1>
-
-                <ul class="Characters">
-                <% for(let i=0; i < info.length; i++) { %>
-                    <li class="Character">
-                        <span class="trashCans"><%= info[i].name %></span>
-                        <span class='fa fa-trash trashCans'></span>
-                    </li>
-                <% } %>
-                </ul>
-
-                <h2>Add A Character:</h2>
-
-                <form action="/addCharacter" method="POST">
-                    <input type="text" placeholder="Name" name="name">
-                    <input type="submit" id="buttonAdd">
-                </form>
+        <div id="db">
+            <div>
+                <!-- Character Section-->
+                <section class="page-section portfolio" id="database">
+                    <div class="container">
+                        <h1>Current Characters in DB</h1>
+                        <ul class="Characters">
+                        <% for(let i=0; i < characters.length; i++) { %>
+                            <li class="Character">
+                                <span class="trashCans"><%= characters[i].name %></span>
+                                <span class='fa fa-trash trashCans'></span>
+                            </li>
+                        <% } %>
+                        </ul>
+                        <h2>Add A Character:</h2>
+                        <form action="/addCharacter" method="POST">
+                            <input type="text" placeholder="Name" name="name">
+                            <input type="submit" id="buttonAdd">
+                        </form>
+                    </div>
             </div>
-            
+            <div>
+                <!-- Planet Section-->
+                <section class="page-section portfolio" id="database">
+                    <div class="container">
+                        <h1>Current Planets in DB</h1>
+                        <ul class="Planets">
+                        <% for(let i=0; i < planets.length; i++) { %>
+                            <li class="Planets">
+                                <span class="trashCans"><%= planets[i].name %></span>
+                                <span class='fa fa-trash trashCans'></span>
+                            </li>
+                        <% } %>
+                        </ul>
+                        <h2>Add A Planet:</h2>
+                        <form action="/addPlanet" method="POST">
+                            <input type="text" placeholder="Name" name="name">
+                            <input type="submit" id="buttonAdd">
+                        </form>
+                    </div>
+            </div>
+        </div>
+
         <!-- Client Side Database -->
         <script src="js/main.js"></script>
     </body>
