@@ -1,152 +1,111 @@
-const express = require("express");
- 
+const express = require('express');
+
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
 const recordRoutes = express.Router();
- 
+
 // This will help us connect to the database
-const dbo = require("../db/conn");
- 
+const dbo = require('../db/conn');
+
 // This help convert the id from string to ObjectId for the _id.
-const ObjectId = require("mongodb").ObjectId;
- 
+const ObjectId = require('mongodb').ObjectId;
+
 // api landing. shows available options
-recordRoutes.route("/api").get( (request, response) => {
-  var resource = {
-      "List All Characters": "/api/character",
-      "List All Planets": "/api/planet"
-  }
-  response.status(200).json(resource)
-})
+recordRoutes.route('/api').get((request, response) => {
+  const resource = {
+    'List All Characters': '/api/character',
+    'List All Planets': '/api/planet'
+  };
+  response.status(200).json(resource);
+});
 
 // GET all characters
-recordRoutes.route("/api/character").get( (request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi')
-  db_connect
-      .collection('characters')
-      .find()
-      .sort({ name: 1 })
-      .toArray( function (err, result) {
-          if (err) throw err
-          response.status(200).json(result)
-      });
-  });
+recordRoutes.route('/api/character').get(function (req, res) {
+  const dbConnect = dbo.getDb();
+  dbConnect
+    .collection('characters')
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.status(200).json(result);
+    });
+});
 
-// GET a single character
-recordRoutes.route("/api/character/:name").get( (request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi')
-  db_connect
-      .collection('characters')
-      .findOne({'name':request.params.name}, function (err, result) {
-          if (err) throw err
-          response.json(result)
-      });
-  });
+// This section will help you get a single record by id
+recordRoutes.route('/api/character/:id').get(function (req, res) {
+  const dbConnect = dbo.getDb();
+  const myQuery = { _id: ObjectId(req.params.id) };
+  dbConnect
+    .collection('characters')
+    .findOne(myQuery, function (err, result) {
+      if (err) throw err;
+      console.log('1 document retrieved by Name');
+      res.json(result);
+    });
+});
 
-// GET all planets
-recordRoutes.route("/api/planet").get( (request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi')
-  db_connect
-      .collection('planets')
-      .find()
-      .sort({ name: 1 })
-      .toArray( function (err, result) {
-          if (err) throw err
-          response.json(result)
-      });
-  });
+// This section will help you get a single record by name
+recordRoutes.route('/api/character/:name').get(function (req, res) {
+  const dbConnect = dbo.getDb();
+  const myQuery = { name: req.params.name };
+  dbConnect
+    .collection('characters')
+    .findOne(myQuery, function (err, result) {
+      if (err) throw err;
+      console.log('1 document retrieved by Name');
+      res.json(result);
+    });
+});
 
-// GET a single planet
-recordRoutes.route("/api/planet/:name").get( (request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi')
-  db_connect
-      .collection('planets')
-      .findOne({'name':request.params.name}, function (err, result) {
-          if (err) throw err
-          response.json(result)
-      });
-  });
-
-// POST a single character
-recordRoutes.route("/api/character/add").post( async (request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi')
-  const body = await request.body
-  console.log(body);
+// This section will help you create a new record.
+recordRoutes.route('/api/character/add').post(function (req, response) {
+  const dbConnect = dbo.getDb();
+  const myObj = {
+    name: req.body.name,
+    planet: req.body.planet
+  };
 
   // check if content is missing
-  if (Object.values(body).includes(undefined) || Object.values(body).includes('')) {
-      return response.status(400).json({
-          error: 'content missing'
-      })
+  if (Object.values(myObj).includes(undefined) || Object.values(myObj).includes('')) {
+    return response.status(400).json({
+      error: 'content missing'
+    });
   }
 
-  //define char JSON structure
-  const char = {
-      name: request.body.name.toLowerCase().trim(),
-      planet: request.body.planet.toLowerCase().trim()
-  }
-
-  //insert to DB
-  db_connect.collection('characters')
-      .insertOne(char, function (err, result) {
-          if (err) throw err
-          console.log(`adding character '${char.name}' from planet '${char.planet}' to DB`);
-          response.json(result)
+  dbConnect.collection('characters').insertOne(myObj, function (err, res) {
+    if (err) throw err;
+    console.log('1 character created');
+    response.json(res);
   });
-  })
+});
 
-// POST a single planet
-recordRoutes.route("/api/planet/add").post( async (request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi')
-  const body = await request.body
-  console.log(body);
-
-  // check if content is missing
-  if (Object.values(body).includes(undefined) || Object.values(body).includes('')) {
-      return response.status(400).json({
-          error: 'content missing'
-      })
-  }
-
-  //define planet JSON structure
-  const planet = {
-      name: request.body.name.toLowerCase().trim()
-  }
-
-  //insert to DB
-  db_connect.collection('planets')
-      .insertOne(planet, function (err, result) {
-          if (err) throw err
-          console.log(`adding planet '${planet.name}' to DB`);
-          response.json(result)
+// This section will help you update a record by id.
+recordRoutes.route('/update/:id').post(function (req, response) {
+  const dbConnect = dbo.getDb();
+  const myQuery = { _id: ObjectId(req.params.id) };
+  const newvalues = {
+    $set: {
+      name: req.body.name,
+      planet: req.body.planet
+    }
+  };
+  dbConnect.collection('characters').updateOne(myQuery, newvalues, function (err, res) {
+    if (err) throw err;
+    console.log('1 character updated');
+    response.json(res);
   });
-  })
+});
 
-// DELETE a single character
-recordRoutes.route("/api/character/delete/:name").delete((request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi');
-  let myquery = {name: request.params.name.toLowerCase().trim()}
-
-  db_connect.collection("characters")
-      .deleteOne(myquery, function (err, obj) {
-          if (err) throw err;
-          console.log(obj.deletedCount + " characters removed");
-          response.json(obj);
+// This section will help you delete a record
+recordRoutes.route('/:id').delete((req, response) => {
+  const dbConnect = dbo.getDb();
+  const myQuery = { _id: ObjectId(req.params.id) };
+  dbConnect.collection('characters').deleteOne(myQuery, function (err, obj) {
+    if (err) throw err;
+    console.log('1 character deleted');
+    response.json(obj);
   });
- });
-
-// DELETE a single planet
-recordRoutes.route("/api/planet/delete/:name").delete((request, response) => {
-  let db_connect = dbo.getDb('dragonBallApi');
-  let myquery = {name: request.params.name.toLowerCase().trim()}
-
-  db_connect.collection("planets")
-      .deleteOne(myquery, function (err, obj) {
-          if (err) throw err;
-          console.log(obj.deletedCount + " planets removed");
-          response.json(obj);
-  });
- });
+});
 
 module.exports = recordRoutes;

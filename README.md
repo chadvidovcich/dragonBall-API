@@ -163,7 +163,7 @@ SECRET = ???
 
 <!-- See also the list of [contributors](https://github.com/coswold/Dragon_Ball_API/contributors) who participated in this project. -->
 
-### Built With
+### Built With MERN
 
 * [MongoDB](https://www.mongodb.com/) - Document based database
 * [Express](https://expressjs.com/) - Minimalist node.js framework
@@ -172,4 +172,3 @@ SECRET = ???
 
 ### Inspiration
 * [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh)
-* Shout out to [Coswold](https://github.com/Coswold) for making the [OG DragonBallAPI](https://github.com/Coswold/Dragon_Ball_API)

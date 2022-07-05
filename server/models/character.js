@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const characterSchema = new Schema({
   name: {
@@ -14,4 +14,4 @@ const characterSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Character", characterSchema);
+module.exports = mongoose.model('Character', characterSchema);
