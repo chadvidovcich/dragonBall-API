@@ -9,8 +9,7 @@ const characterSchema = new Schema({
   },
   planet: {
     type: String,
-    require: true,
-    unique: true
+    require: true
   }
 });
 

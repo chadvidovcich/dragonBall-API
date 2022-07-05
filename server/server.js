@@ -13,7 +13,6 @@ app.use(cors());
 // import routes
 const mainRoutes = require('./routes/main.route');
 const characterRoutes = require('./routes/character.route');
-const planetRoutes = require('./routes/planet.route');
 
 //database connection
 const dbo = require('./db/conn');
@@ -24,7 +23,6 @@ dbo.connectToServer(function (err) {
 //routes
 app.use('/', mainRoutes);
 app.use('/api/character', characterRoutes);
-app.use('/api/planet', planetRoutes);
 
 //start server
 const port = process.env.PORT || 8000;

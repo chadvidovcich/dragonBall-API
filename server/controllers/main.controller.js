@@ -1,3 +1,4 @@
+//api landing response. return a summary of commands available.
 const apiLanding = async (req,res) => {
     const resource = {
       'List All Characters': '/api/character',
