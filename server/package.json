@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon --exec \"npm run lint && nodemon server.js\"",
+    "lint": "eslint . --fix",
     "test": "export NODE_ENV=test && nodemon --exec 'mocha */**.test.js --exit --timeout 10000'"
   },
   "keywords": [],
@@ -26,5 +27,8 @@
     "eslint-plugin-import": "^2.26.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19"
-  }
+  },
+  "eslintIgnore": [
+    "*.test.js"
+  ]
 }
