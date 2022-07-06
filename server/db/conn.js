@@ -11,11 +11,11 @@ if (env === 'test') {
   Db = process.env.ATLAS_URI;
 }
 
-let _db;
+let dbConnection;
 
 module.exports = {
   connectToServer() {
-    _db = mongoose.connect(Db, { useNewUrlParser: true, useUnifiedTopology: true })
+    dbConnection = mongoose.connect(Db, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => {
         console.log('Connected to database');
       })
@@ -23,6 +23,6 @@ module.exports = {
   },
 
   getDb() {
-    return _db;
+    return dbConnection;
   },
 };

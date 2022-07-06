@@ -45,6 +45,8 @@ const addCharacter = (req, res) => {
   Character.create(myObj)
     .then((char) => res.status(200).json(char))
     .catch((err) => res.status(400).json(`Error! ${err}`));
+
+  return null;
 };
 
 // update character by id
@@ -68,6 +70,8 @@ const updateCharacter = async (req, res) => {
   Character.updateOne(myQuery, newValues)
     .then((char) => res.status(200).json(char))
     .catch((err) => res.status(400).json(`Error! ${err}`));
+
+  return null;
 };
 
 // delete character by id

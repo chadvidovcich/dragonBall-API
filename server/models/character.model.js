@@ -11,6 +11,7 @@ const characterSchema = new Schema({
   planet: {
     type: String,
     require: true,
+    unique: false,
   },
 });
 

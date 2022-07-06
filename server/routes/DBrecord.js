@@ -2,7 +2,8 @@ const express = require('express');
 
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
+// The router will be added as a middleware and will take
+// control of requests starting with path /record.
 const recordRoutes = express.Router();
 
 // This will help us connect to the database
@@ -94,6 +95,8 @@ recordRoutes.route('/api/character/add').post(async (request, response) => {
       console.log(`adding character '${char.name}' from planet '${char.planet}' to DB`);
       response.json(result);
     });
+
+  return null;
 });
 
 // POST a single planet
@@ -121,6 +124,8 @@ recordRoutes.route('/api/planet/add').post(async (request, response) => {
       console.log(`adding planet '${planet.name}' to DB`);
       response.json(result);
     });
+
+  return null;
 });
 
 // DELETE a single character
