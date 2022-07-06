@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const characterSchema = new Schema({
   name: {
     type: String,
     require: true,
-    unique: true
+    unique: true,
   },
   planet: {
     type: String,
-    require: true
-  }
+    require: true,
+  },
 });
 
-module.exports = mongoose.model('Character', characterSchema);
+const Character = mongoose.model('Character', characterSchema);
+module.exports = Character;

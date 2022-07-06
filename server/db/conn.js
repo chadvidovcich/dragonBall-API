@@ -1,18 +1,28 @@
+const env = process.env.NODE_ENV;
 const mongoose = require('mongoose');
-const Db = process.env.ATLAS_URI;
+require('dotenv').config({ path: '../config.env' });
+
+let Db = process.env.ATLAS_URI;
+
+// testing environment selection
+if (env === 'test') {
+  Db = process.env.ATLAS_URI_TEST;
+} else {
+  Db = process.env.ATLAS_URI;
+}
 
 let _db;
 
 module.exports = {
-  connectToServer: function () {
-    _db = mongoose.connect(Db, { useNewUrlParser: true ,useUnifiedTopology: true })
+  connectToServer() {
+    _db = mongoose.connect(Db, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => {
         console.log('Connected to database');
-    })
-      .catch(err => console.log(err));
+      })
+      .catch((err) => console.log(err));
   },
 
-  getDb: function () {
+  getDb() {
     return _db;
-  }
+  },
 };

@@ -1,4 +1,4 @@
-//import express
+// import express
 const express = require('express');
 // import controllers
 const mainController = require('../controllers/main.controller');

@@ -4,7 +4,6 @@
   "description": "## Table of contents",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --runInBand --forceExit",
     "server": "npm start --prefix server",
     "client": "npm start --prefix client",
     "lint": "eslint ./server --fix && eslint ./client --fix",
@@ -25,16 +24,11 @@
     "concurrently": "^7.2.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "eslint": "^8.19.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.3",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.30.1",
-    "jest": "^28.1.2",
-    "superagent": "^8.0.0",
-    "supertest": "^6.2.4"
+    "eslint-plugin-react": "^7.30.1"
   }
 }
