@@ -1,4 +1,9 @@
 // api landing response. return a summary of commands available.
+const baseLanding = async (req, res) => {
+  res.redirect('/api');
+};
+
+// api landing response. return a summary of commands available.
 const apiLanding = async (req, res) => {
   const resource = {
     'List All Characters': '/api/character',
@@ -7,4 +12,4 @@ const apiLanding = async (req, res) => {
   res.status(200).json(resource);
 };
 
-module.exports = { apiLanding };
+module.exports = { apiLanding, baseLanding };

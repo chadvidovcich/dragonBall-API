@@ -17,7 +17,7 @@ router.route('/ID/:id').get(characterController.characterById);
 // POST new character
 router.route('/add').post(characterController.addCharacter);
 // POST update character by id
-router.route('/update/:id').post(characterController.updateCharacter);
+router.route('/update/:id').put(characterController.updateCharacter);
 // DELETE remove character
 router.route('/delete/:id').delete(characterController.deleteCharacter);
 

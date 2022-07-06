@@ -9,6 +9,7 @@ const mainController = require('../controllers/main.controller');
 // take control of requests starting with path /record.
 const router = express.Router();
 
+router.get('/', mainController.baseLanding);
 router.get('/api', mainController.apiLanding);
 
 // export to use in server.js

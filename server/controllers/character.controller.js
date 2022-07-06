@@ -71,14 +71,14 @@ const updateCharacter = async (req, res) => {
     .then((char) => res.status(200).json(char))
     .catch((err) => res.status(400).json(`Error! ${err}`));
 
-  return null;
+  return newValues;
 };
 
 // delete character by id
 const deleteCharacter = async (req, res) => {
   const myQuery = { _id: ObjectId(req.params.id) };
-  Character.findByIdAndDelete(myQuery)
-    .then((char) => res.status(200).json(char))
+  Character.findOneAndDelete(myQuery)
+    .then((char) => res.status(200).json('deleted successfully'))
     .catch((err) => res.status(400).json(`Error! ${err}`));
 };
 
