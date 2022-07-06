@@ -48,7 +48,7 @@ export default function Edit() {
 
     // This will send a post request to update the data in the database.
     await fetch(`http://localhost:8000/api/character/update/${params.id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
