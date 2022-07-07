@@ -9,6 +9,9 @@ import 'font-awesome/css/font-awesome.min.css';
 import App from './app';
 import './css/style.css';
 
+// env variable
+require('dotenv').config({ path: './config.env' });
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
