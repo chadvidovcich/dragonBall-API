@@ -10,7 +10,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 // Our parent block
-describe('Main Route', () => {
+describe('Server Main Route', () => {
   // remove all entries
   beforeEach((done) => { // Before each test we empty the database
     Character.deleteMany({}, (err) => {
