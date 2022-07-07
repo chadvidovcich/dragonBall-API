@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "startProd": "NODE_ENV=production react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "dev": "nodemon --exec \"npm run lint && nodemon start\"",
