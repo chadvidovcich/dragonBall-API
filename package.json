@@ -4,6 +4,7 @@
   "description": "## Table of contents",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm install --prefix server && npm install --prefix client",
     "server:start": "npm start --prefix server",
     "server:dev": "npm run dev --prefix server ",
     "server:lint": "npm run lint --prefix server ",
