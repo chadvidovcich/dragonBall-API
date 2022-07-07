@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
-const SERVER_URL = (process.env.NODE_ENV === 'production') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
+const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
 
 export default function Edit() {
   const [form, setForm] = useState({
@@ -49,7 +49,7 @@ export default function Edit() {
     };
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:8000/api/character/update/${params.id}`, {
+    await fetch(`${SERVER_URL}/api/character/update/${params.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
