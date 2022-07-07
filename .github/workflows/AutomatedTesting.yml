@@ -8,7 +8,11 @@ on:
     branches: [ "main", "develop" ]
   pull_request:
     branches: [ "main", "develop" ]
-
+    
+env:
+  ATLAS_URI_TEST: "mongodb+srv://chadmin:R4OpUcvhlMO0d8jZ@cluster0.vqb8rkh.mongodb.net/test?retryWrites=true&w=majority"
+  DATABASE_NAME: "dragonBallApi"
+  
 jobs:
   build:
 
