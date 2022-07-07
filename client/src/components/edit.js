@@ -49,7 +49,7 @@ export default function Edit() {
     };
 
     // This will send a post request to update the data in the database.
-    await fetch(`${SERVER_URL}/api/character/update/${params.id}`, {
+    await fetch(`${SERVER_URL}/character/update/${params.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
