@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
-const SERVER_URL = process.env.NODE_ENV === 'production' ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
+const SERVER_URL = (true) ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
 
 export default function Edit() {
   const [form, setForm] = useState({
