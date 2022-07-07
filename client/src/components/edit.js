@@ -60,7 +60,7 @@ export default function Edit() {
   // This following section will display the form that takes input from the user to update the data.
   return (
     <div>
-      <h3>Update Character</h3>
+      <h3>Edit Character</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name: </label>
@@ -87,7 +87,7 @@ export default function Edit() {
         <div className="form-group">
           <input
             type="submit"
-            value="Update Record"
+            value="Submit Update"
             className="btn btn-primary"
           />
         </div>
