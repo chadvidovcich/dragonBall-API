@@ -9,6 +9,9 @@ import RecordList from './components/recordList';
 import Edit from './components/edit';
 import Create from './components/create';
 
+// env variable
+require('dotenv').config({ path: './config.env' });
+
 function App() {
   return (
     <div>
