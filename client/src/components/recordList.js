@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const SERVER_URL = 'https://dbapidb.herokuapp.com/api' || 'http://localhost:8000/api';
+
 function Record(props) {
   return (
     <tr>
@@ -30,7 +32,7 @@ export default function RecordList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch('http://localhost:8000/api/character');
+      const response = await fetch(`${SERVER_URL}/character`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -48,7 +50,7 @@ export default function RecordList() {
 
   // This method will delete a character
   async function deleteRecord(id) {
-    await fetch(`http://localhost:8000/api/character/delete/${id}`, {
+    await fetch(`${SERVER_URL}/character/delete/${id}`, {
       method: 'DELETE',
     });
 

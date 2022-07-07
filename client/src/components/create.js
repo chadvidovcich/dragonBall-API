@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+const SERVER_URL = (process.env.NODE_ENV === 'test') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
+
 export default function Create() {
   const [form, setForm] = useState({
     name: '',
@@ -20,7 +22,7 @@ export default function Create() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newCharacter = { ...form };
 
-    await fetch('http://localhost:8000/api/character/add', {
+    await fetch(`${SERVER_URL}/character/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

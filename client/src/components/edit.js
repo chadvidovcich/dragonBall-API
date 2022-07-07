@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
+const SERVER_URL = 'https://dbapidb.herokuapp.com/api' || 'http://localhost:8000/api';
+
 export default function Edit() {
   const [form, setForm] = useState({
     name: '',
@@ -13,7 +15,7 @@ export default function Edit() {
   useEffect(() => {
     async function fetchData() {
       const id = params.id.toString();
-      const response = await fetch(`http://localhost:8000/api/character/ID/${params.id.toString()}`);
+      const response = await fetch(`${SERVER_URL}/character/ID/${params.id.toString()}`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
