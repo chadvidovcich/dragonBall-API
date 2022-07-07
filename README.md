@@ -1,6 +1,6 @@
 # DragonBallAPI
 
-## Table of contents
+## Table of contents 
 
 - [What it is and Where to find it](#what-it-is)
 - [API Usage](#api-usage)
