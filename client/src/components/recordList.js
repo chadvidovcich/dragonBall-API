@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const SERVER_URL = (process.env.NODE_ENV === 'test') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
+const SERVER_URL = (process.env.NODE_ENV === 'production') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
 
 function Record(props) {
   return (

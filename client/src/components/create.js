@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const SERVER_URL = (process.env.NODE_ENV === 'test') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
+const SERVER_URL = (process.env.NODE_ENV === 'production') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
 
 export default function Create() {
   const [form, setForm] = useState({
