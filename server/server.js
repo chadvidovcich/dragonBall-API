@@ -25,7 +25,7 @@ dbo.connectToServer((err) => {
 
 // routes
 app.use('/', mainRoutes);
-app.use('/api/character', characterRoutes);
+app.use('/api/character/', characterRoutes);
 
 // start server
 const port = process.env.PORT || 8000;

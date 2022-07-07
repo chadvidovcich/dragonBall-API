@@ -2,8 +2,6 @@
 const { ObjectId } = require('mongodb');
 const Character = require('../models/character.model');
 
-// This help convert the id from string to ObjectId for the _id.
-
 // return a list of all characters in the database
 const getAllCharacters = async (req, res) => {
   Character.find()

@@ -9,17 +9,17 @@ const router = express.Router();
 const characterController = require('../controllers/character.controller');
 
 // GET all characters
-router.route('/').get(characterController.getAllCharacters);
+router.get('/', characterController.getAllCharacters);
 // GET single character by name
-router.route('/:name').get(characterController.characterByName);
+router.get('/:name', characterController.characterByName);
 // GET single character by id
-router.route('/ID/:id').get(characterController.characterById);
+router.get('/ID/:id', characterController.characterById);
 // POST new character
-router.route('/add').post(characterController.addCharacter);
+router.post('/add', characterController.addCharacter);
 // POST update character by id
-router.route('/update/:id').put(characterController.updateCharacter);
+router.put('/update/:id', characterController.updateCharacter);
 // DELETE remove character
-router.route('/delete/:id').delete(characterController.deleteCharacter);
+router.delete('/delete/:id', characterController.deleteCharacter);
 
 // export to use in server.js
 module.exports = router;
