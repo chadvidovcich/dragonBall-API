@@ -10,6 +10,7 @@ My goal was to simulate a professional work environment.
 - I set up test suites using **Mocha/Chai**.
 - I set up continuous integration to run the tests and linting each PR using **GitHub actions**.
 - I deployed the backend and frontend separately on two deployments using **Heroku**.
+- I wrote a clean and understandable readme with examples of each API request. 
 - I used issues, feature branches and Pull Requests along the way.
 
 ## Why I built the project this way
