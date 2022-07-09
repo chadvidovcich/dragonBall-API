@@ -4,7 +4,7 @@
 name: Test Code Base
 
 on:
-  push:
+  # push:
     # no need to do it again on push
     # branches: [ "main" ]
   pull_request:
