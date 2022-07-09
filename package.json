@@ -4,7 +4,6 @@
   "description": "## Table of contents",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm install --prefix server && npm install --prefix client",
     "server:start": "npm start --prefix server",
     "server:dev": "npm run dev --prefix server ",
     "server:lint": "npm run lint --prefix server ",
@@ -13,6 +12,7 @@
     "client:dev": "npm run dev --prefix client",
     "client:lint": "npm run lint --prefix client",
     "client:test": "npm run test --prefix client",
+    "postinstall": "npm install --prefix server && npm install --prefix client",
     "start": "concurrently \"npm run server:start\" \"npm run client:start\"",
     "devAll": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "lintAll": "npm run server:lint && npm run client:lint",
