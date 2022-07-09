@@ -1,4 +1,41 @@
-# DragonBallAPI
+# Purpose
+
+## How I worked on this project
+
+My goal was to simulate a professional work environment.
+- I built a backend server using **Express**.
+- I integrated a database with my server using **MongoDB**.
+- I built a frontend UI using **React** and **Bootstrap**.
+- I set up linting rules and npm scripts using **ESlint**.
+- I set up test suites using **Mocha/Chai**.
+- I set up continuous integration to run the tests and linting each PR using **GitHub actions**.
+- I deployed the backend and frontend separately on two deployments using **Heroku**.
+- I used issues, feature branches and Pull Requests along the way.
+
+## Why I built the project this way
+
+- I chose MongoDB because it was very quick and easy to get a database connected in my application. This project could easily be migrated to a SQL database.
+
+- Testing is an important stage of developing production applications. I've covered the essential features of the app with tests.
+
+- Automating the linting and testing during each PR will greatly reduce the potential for breaking things in the future. 
+
+- Using issues, feature branches and Pull Requests helps keep documentation on each change. Who made it? Why did they make it? What does it affect? etc. 
+
+## If I had more time I would add/change this
+
+- Add more style to the UI. 
+
+- Add image links to each character. These would display on the UI.
+
+- Refactor some of the code. [The character controller](https://github.com/chadvidovcich/dragonBall-API/blob/main/server/controllers/character.controller.js) could be a good place to start looking for optimizations. 
+
+<br>
+<br>
+<br>
+<br>
+
+# Dragon Ball API
 
 ## Table of contents 
 
@@ -10,11 +47,7 @@
 
 ## What it is
 
-The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries will return characters from the series. 
-
-This project serves as a playground for learning. The server side is written in **Express** and utilizes **MongoDB** as the database. Once I had the RESTful API set up, I created a quick client site using React and Bootstrap.
-
-I also set up **ESlint** for linting and **Mocha/Chai** for testing. These were added to the CI/CD pipeline and now run at each push to the master branch on Github. 
+The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries will return characters from the series.  
 
 ## Where to find it
 
