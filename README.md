@@ -6,169 +6,218 @@
 - [API Usage](#api-usage)
   - [REST](#rest)
   - [Characters](#characters)
-  - [Planets](#planets)
 - [Acknowledgments](#acknowledgments)
 
 ## What it is
 
-**Under Development Jun 2022**
+The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries will return characters from the series. 
 
-The Dragon Ball API is a RESTful API based on the television series Dragon Ball. API queries will return characters or planets from the series. 
-<!-- By creating an account, you will be have the ability to submit characters and planets to the database to help the community grow. -->
+This project serves as a playground for learning. The server side is written in **Express** and utilizes **MongoDB** as the database. Once I had the RESTful API set up, I created a quick client site using React and Bootstrap.
+
+I also set up **ESlint** for linting and **Mocha/Chai** for testing. These were added to the CI/CD pipeline and now run at each push to the master branch on Github. 
 
 ## Where to find it
-> Check out the deployment [here](https://dragonballapi.herokuapp.com/).
 
-# API Usage
+> Check out the web UI deployment (React) [here](https://dragonballapi.herokuapp.com/).
+
+## RESTful API Usage
 This documentation will help you get familiar with the resources of the Dragon Ball API and show you how to make different queries, so that you can get the most out of it.
 
-<!-- ### Rate Limit -->
-<!-- Authentication has been implemented as well as a limit on queries of up to 100 per every 15 minutes. I implemented `express-rate-limit` to stop malicious queries, data submissions, and account creations. After several incorrect attempts, your IP will be flagged for a certain period of time. -->
+### Character Schema
+```
+name: {
+  type: String,
+  require: true,
+  unique: true,
+}
 
-## REST
-Base url: https://dragonballapi.herokuapp.com/api/
 
-The base url contains information about all available API resources.
+planet: {
+  type: String,
+  require: true,
+  unique: false,
+}
+```
+
+### Base URL
+API Base URL: https://dbapidb.herokuapp.com/api/
+
+The base URL contains information about all available API resources.
 
 *Sample Request*
 ```
-https://dragonballapi.herokuapp.com/api/
+https://dbapidb.herokuapp.com/api/
 ```
 ```
 //JSON Response
 
 {
-  "characters": "https://dragonballapi.herokuapp.com/api/character",
-  "planets": "https://dragonballapi.herokuapp.com/api/planet",
+  {'GET all characters': `{Base_URL}/character`},
+  {'GET character by ID': `{Base_URL}/character/ID/:id`},
+  {'GET character by name': `{Base_URL}/character/:name`},
+  {'POST add character by ID': `{Base_URL}/character/add`},
+  {'PUT update character by ID': `{Base_URL}/character/update/:id`},
+  {'DELETE character by ID': `{Base_URL}/character/delete/:id`}
 }
 ```
-Currently available resources are:
 
-* Character: Used to get all characters
-* Planet: Used to get all planets
+**Get all characters**
 
-### Characters
+You can access the list of all characters by using the /character endpoint.
 
-<!-- #### Character schema
-|Key|Type|Description|
-|---|---|---|
-|name|string|The name of the character.
-|race|string|The species of the character.
-|origin planet|string (url)|Url to the character's origin planet.
-|wiki url|string (url)|Link to the character's wiki page.
-|series|string|The sub-series that the character is from i.e. Z, GT, etc.
-|image|string (url)|Link to the character's image.
-|url|string (url)|Link to the character's own URL endpoint.
-|created|string|Time at which the character was created in the database. -->
-<!-- |edited|string|Time at which the character was last edited in the database. -->
-
-#### Get all characters
-You can access the list of characters by using the /character endpoint.
 ```
-https://dragonballapi.herokuapp.com/api/character/
+GET
+https://dbapidb.herokuapp.com/api/character/
 ```
 
-#### Get a single character
-You can get a single character by adding the name as a parameter: /character/`<Gohan>`
+```
+//JSON Response
+
+{
+  {"_id":"62c5cf5d6e63660cb8b7c5e3","name":"Goku","planet":"Earth","__v":0},
+  {"_id":"62c5cf636e63660cb8b7c5e7","name":"Vegeta","planet":"Earth","__v":0},
+  {"_id":"62c5e7a28ec5037eac93a1e2","name":"Gohan","planet":"Earth","__v":0},
+  {"_id":"62c684d4097c6a7af38a3600","name":"Bulma","planet":"Earth","__v":0}]
+
+}
+```
+
+**Get a single character by name:**
 
 If a name has a space `' '`, replace it with an underscore `_` like in *`Majin_Buu`*
+
 ```
-https://dragonballapi.herokuapp.com/api/character/Gohan
+GET
+https://dbapidb.herokuapp.com/api/character/Goku
 ```
-<!-- ```
+
+```
+//JSON Response
+
 {
-  "species":"Saiyan",
-  "status":"Alive",
-  "originPlanet":"Earth",
-  "gender":"Male",
-  "_id":"5c787595373a47d30cff0317",
-  "name":"Gohan","series":"Z",
-  "image":"../images/Gohan.jpg",
-  "created":"2019-02-28T23:58:13.141Z",
-  "url":"/api/character/Gohan",
-  "__v":0
+  {"_id":"62c5cf5d6e63660cb8b7c5e3","name":"Goku","planet":"Earth","__v":0}
+
 }
-``` -->
-
-### Planets
-
-<!-- #### Planets schema
-|Key|Type|Description|
-|---|---|---|
-|name|string|The name of the planet.
-|residents|string|All characters from this planet.
-|image|string (url)|Link to the planet's image.
-|url|string|Link to planets own endpoint.
-|created|string|Time at which the planet was created in the database. -->
-
-
-#### Get all planets
-You can access the list of characters by using the /planet endpoint.
-```
-https://dragonballapi.herokuapp.com/api/planet/
 ```
 
-#### Get a single planet
-You can get a single character by adding the name as a parameter: /planet/`<Earth>`
 
-If a planet has a space `' '`, replace it with an underscore `_` like in  *`Cooler_6`*
+**Get a single character by ID:**
+
 ```
-https://dragonballapi.herokuapp.com/api/planet/Earth
+GET
+https://dbapidb.herokuapp.com/api/character/ID/62c5cf636e63660cb8b7c5e7
 ```
-<!-- ```
+
+```
+//JSON Response
+
 {
-  "residents":["Gohan","Trunks","Android16"],
-  "_id":"5c785e7a52cc1dd11ddb59ba",
-  "created":"2019-02-28T22:19:38.652Z",
-  "name":"Earth",
-  "url":"/api/planet/Earth",
-  "image":"/api/planet/images/Earth.jpeg",
-  "__v":0
+  {"_id":"62c5cf636e63660cb8b7c5e7","name":"Vegeta","planet":"Earth","__v":0}
+
 }
-``` -->
+```
 
-<!-- ## Getting Started -->
+**Add a new character:**
 
-<!-- These instructions will get you a copy of the project up and running on your local machine for **development and testing purposes**. -->
+New character must follow the [character schema](#character-schema)
 
-<!-- For access to the live deployment, visit:  
-[https://dragonballapi.herokuapp.com](https://dragonballapi.herokuapp.com/) -->
+```
+POST
+https://dbapidb.herokuapp.com/api/character/add
+```
 
-<!-- ### Installing
+```
+//JSON Response
 
-Install all dependencies
+{
+  {"name":"NewCharacter","planet":"NewPlanet","_id":"62c92046e8b41273c809c8db","__v":0}
+
+}
+```
+
+**Update character by ID:**
+
+Character update must follow the [character schema](#character-schema)
+
+```
+PUT
+https://dbapidb.herokuapp.com/api/character/update/62c5cf636e63660cb8b7c5e7
+```
+
+```
+//JSON Response
+
+{
+  {"acknowledged":true,"modifiedCount":1,"upsertedId":null,"upsertedCount":0,"matchedCount":1}
+
+}
+```
+**Delete character by ID:**
+
+```
+DELETE
+https://dbapidb.herokuapp.com/api/character/delete/62c5cf636e63660cb8b7c5e7
+```
+
+```
+//JSON Response
+
+{
+  "deleted successfully"
+
+}
+```
+
+## Local Installation
+
+You can follow these steps to run the application on your local environment for **development and testing purposes**.
+
+For access to the live web UI deployment, visit:  
+[https://dragonballapi.herokuapp.com](https://dragonballapi.herokuapp.com/)
+
+### Installing
+
+Install all dependencies. This will trigger npm install in both the server and client folders. 
 
 ```
 npm install
 ```
 
-Create .env file
+Create .env file in the server folder for access to MongoDB URI
 
 ```
-touch .env
+touch ./server/.env
 ```
 
-Add secret key to .env
+Add the following to the new file at /server/.env
+
+[Follow this guide to find your Mongo URI](https://www.mongodb.com/docs/guides/atlas/connection-string/)
 
 ```
-SECRET = ???
-``` -->
+ATLAS_URI = "mongodb+srv://<YOUR MONGODB URI>"
+
+NODE_ENV="develop"
+```
+
+Start the server and client concurrently for local **development and testing purposes**
+
+```
+npm start
+```
 
 ## Acknowledgments
-
 
 ### Authors
  
 [Chad](https://github.com/chadvidovcich) - *Main Author*
-
-<!-- See also the list of [contributors](https://github.com/coswold/Dragon_Ball_API/contributors) who participated in this project. -->
 
 ### Built With MERN
 
 * [MongoDB](https://www.mongodb.com/) - Document based database
 * [Express](https://expressjs.com/) - Minimalist node.js framework
 * [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+  * [Bootstrap](https://getbootstrap.com/) - Frontend toolkit
 * [Node (npm)](https://www.npmjs.com/) - Dependency management
-
-### Inspiration
-* [Rick and Morty API](https://rickandmortyapi.com/) created by [Axel](https://github.com/afuh)
+  * [ESlint](https://eslint.org/) - Linting and CI/CD
+  * [Mocha](https://mochajs.org/) - Testing framework
+  * [Chai](https://www.chaijs.com/) - Testing assertion library

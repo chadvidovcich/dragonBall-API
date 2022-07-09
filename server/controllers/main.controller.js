@@ -1,3 +1,5 @@
+const BASE_API = 'https://dragonballapi.herokuapp.com/api';
+
 // api landing response. return a summary of commands available.
 const baseLanding = async (req, res) => {
   res.redirect('/api');
@@ -6,8 +8,12 @@ const baseLanding = async (req, res) => {
 // api landing response. return a summary of commands available.
 const apiLanding = async (req, res) => {
   const resource = {
-    'List All Characters': '/api/character',
-    'List All Planets': '/api/planet',
+    'GET all characters': `${BASE_API}/character`,
+    'GET character by ID': `${BASE_API}/character/ID/:id`,
+    'GET character by name': `${BASE_API}/character/:name`,
+    'POST add character by ID': `${BASE_API}/character/add`,
+    'PUT update character by ID': `${BASE_API}/character/update/:id`,
+    'DELETE character by ID': `${BASE_API}/character/delete/:id`,
   };
   res.status(200).json(resource);
 };

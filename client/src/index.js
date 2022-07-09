@@ -9,6 +9,8 @@ import 'font-awesome/css/font-awesome.min.css';
 import App from './app';
 import './css/style.css';
 
+document.title = 'Dragonball API';
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
