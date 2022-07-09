@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import env from 'react-dotenv';
 
 const SERVER_URL = (env.NODE_ENV === 'production') ? 'https://dbapidb.herokuapp.com/api' : 'http://localhost:8000/api';
+const GITHUB_URL = 'https://github.com/chadvidovcich/dragonBall-API';
 
 function Record(props) {
   return (
@@ -73,6 +74,9 @@ export default function RecordList() {
   function getServerUrl() {
     return SERVER_URL;
   }
+  function getGitHubUrl() {
+    return GITHUB_URL;
+  }
 
   // This following section will display the table with the records of individuals.
   return (
@@ -90,6 +94,9 @@ export default function RecordList() {
       <div>
         <p>
           <a href={getServerUrl()}>Visit the RESTful API</a>
+        </p>
+        <p>
+          <a href={getGitHubUrl()}>Visit the GitHub repository</a>
         </p>
       </div>
     </div>
