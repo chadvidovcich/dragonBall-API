@@ -211,7 +211,7 @@ npm start
  
 [Chad](https://github.com/chadvidovcich) - *Main Author*
 
-### Built With MERN
+### Built With the MERN stack
 
 * [MongoDB](https://www.mongodb.com/) - Document based database
 * [Express](https://expressjs.com/) - Minimalist node.js framework
