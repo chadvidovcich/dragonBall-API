@@ -16,9 +16,10 @@ name: Lint Code Base
 #############################
 on:
   push:
-    branches: [ "main" ]
+    # no need to do it again on push
+    # branches: [ "main" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
 
 ###############
 # Set the Job #

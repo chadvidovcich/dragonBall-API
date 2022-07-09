@@ -5,9 +5,10 @@ name: Test Code Base
 
 on:
   push:
-    branches: [ "main" ]
+    # no need to do it again on push
+    # branches: [ "main" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
     
 env:
   ATLAS_URI_TEST: "mongodb+srv://chadmin:R4OpUcvhlMO0d8jZ@cluster0.vqb8rkh.mongodb.net/test?retryWrites=true&w=majority"
