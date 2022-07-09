@@ -70,6 +70,10 @@ export default function RecordList() {
     ));
   }
 
+  function getServerUrl() {
+    return SERVER_URL;
+  }
+
   // This following section will display the table with the records of individuals.
   return (
     <div>
@@ -83,6 +87,11 @@ export default function RecordList() {
         </thead>
         <tbody>{recordList()}</tbody>
       </table>
+      <div>
+        <p>
+          <a href={getServerUrl()}>Visit the RESTful API</a>
+        </p>
+      </div>
     </div>
   );
 }
