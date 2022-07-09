@@ -16,11 +16,9 @@ name: Lint Code Base
 #############################
 on:
   push:
-    branches: [develop, main]
-    # branches-ignore: [master, main]
-    # The above hidden line will ignore pushes. 
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [develop, main]
+    branches: [ "main", "develop" ]
 
 ###############
 # Set the Job #
@@ -54,3 +52,8 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          LINTER_RULES_PATH: /
+          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          VALIDATE_JAVASCRIPT_ES: true
+          
