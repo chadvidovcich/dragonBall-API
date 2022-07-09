@@ -18,7 +18,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "develop", "dev" ]
 
 ###############
 # Set the Job #
