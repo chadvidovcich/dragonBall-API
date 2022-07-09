@@ -3,9 +3,9 @@
 ## Table of contents 
 
 - [What it is and Where to find it](#what-it-is)
-- [API Usage](#api-usage)
-  - [REST](#rest)
-  - [Characters](#characters)
+- [Where to find it](#where-to-find-it)
+- [RESTful API Usage](#restful-api-usage)
+- [Local Installation](#local-installation)
 - [Acknowledgments](#acknowledgments)
 
 ## What it is
@@ -52,12 +52,12 @@ https://dbapidb.herokuapp.com/api/
 //JSON Response
 
 {
-  {'GET all characters': `{Base_URL}/character`},
-  {'GET character by ID': `{Base_URL}/character/ID/:id`},
-  {'GET character by name': `{Base_URL}/character/:name`},
-  {'POST add character by ID': `{Base_URL}/character/add`},
-  {'PUT update character by ID': `{Base_URL}/character/update/:id`},
-  {'DELETE character by ID': `{Base_URL}/character/delete/:id`}
+  "GET all characters":"https://dbapidb.herokuapp.com/api/character",
+  "GET character by ID":"https://dbapidb.herokuapp.com/api/character/ID/:id",
+  "GET character by name":"https://dbapidb.herokuapp.com/api/character/:name",
+  "POST add character by ID":"https://dbapidb.herokuapp.com/api/character/add",
+  "PUT update character by ID":"https://dbapidb.herokuapp.com/api/character/update/:id",
+  "DELETE character by ID":"https://dbapidb.herokuapp.com/api/character/delete/:id"
 }
 ```
 

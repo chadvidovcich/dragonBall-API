@@ -1,4 +1,4 @@
-const BASE_API = 'https://dragonballapi.herokuapp.com/api';
+const BASE_API = 'https://dbapidb.herokuapp.com/api/';
 
 // api landing response. return a summary of commands available.
 const baseLanding = async (req, res) => {
